@@ -49,6 +49,9 @@ module.exports = appInfo => {
   config.jwt = {
     secret: 'Nick',
   };
+  config.multipart = {
+    mode: 'file',
+  };
   return {
     ...config,
     ...userConfig,

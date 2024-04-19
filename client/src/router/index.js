@@ -1,5 +1,5 @@
 // router/index.js
-import Index from '../container/Index'
+import Index from '../container/Index/Index'
 import About from '../container/About'
 
 const routes = [

@@ -1,4 +1,3 @@
-import react, { useState } from 'react'
 import {
   BrowserRouter as Router,
   Routes,

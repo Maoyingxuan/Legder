@@ -1,7 +1,6 @@
 // src/utils/axios.js
 import axios from 'axios'
 import { Toast } from 'zarm'
-
 const MODE = import.meta.env.MODE // 环境变量
 
 axios.defaults.baseURL = MODE == 'development' ? '/api' : 'http://127.0.0.1/7001'

@@ -1,16 +1,20 @@
 import './App.css'
 import routes from '../src/router'
 import {BrowserRouter as Router,Routes,Route} from "react-router-dom"
+import { ConfigProvider } from 'zarm'
+import zhCN from 'zarm/lib/config-provider/locale/zh_CN'
+import 'zarm/dist/zarm.css'
 function App() {
   return (
-    <>
-      {/* <div>hello</div> */}
-      <Router>
-        <Routes>
-      {routes.map(route => <Route exact key={route.path} path={route.path} element={<route.component />} />)}
-      </Routes>
-      </Router>
-    </>
+  <Router>
+    <ConfigProvider primaryColor={'#007fff'} locale={zhCN}>
+      <>
+       <Routes>
+        {routes.map(route => <Route exact key={route.path} path={route.path} element={<route.component />} />)}
+       </Routes>
+      </>
+    </ConfigProvider>
+  </Router>   
   )
 }
 

@@ -1,5 +1,5 @@
-import './App.css'
 import routes from '../src/router'
+import NavBar from '@/components/NavBar';
 import {BrowserRouter as Router,Routes,Route} from "react-router-dom"
 import { ConfigProvider } from 'zarm'
 import zhCN from 'zarm/lib/config-provider/locale/zh_CN'
@@ -12,6 +12,7 @@ function App() {
        <Routes>
         {routes.map(route => <Route exact key={route.path} path={route.path} element={<route.component />} />)}
        </Routes>
+       <NavBar />
       </>
     </ConfigProvider>
   </Router>   

@@ -8,6 +8,8 @@ import {get,REFRESH_STATE,LOAD_STATE} from '@/utils'
 import dayjs from 'dayjs'
 import PopupType from '@/components/PopupType'
 import PopupDate from '@/components/PopupDate'
+import CustomIcon from '@/components/CustomIcon'
+import PopupAddBill from '@/components/PopupAddBill'
 // import Test from '@/components/Test';
 const Home = () => {
   const [list, setList] = useState([]); // 账单列表
@@ -59,6 +61,10 @@ const Home = () => {
   const monthToggle = () => {
     monthRef.current && monthRef.current.show()
   };
+  const addRef = useRef(); // 添加账单 ref
+  const addToggle = () =>{
+    addRef.current && addRef.current.show()
+  }
 
   // 筛选类型
   const select = (item) => {
@@ -116,6 +122,8 @@ const Home = () => {
     </div>
     <PopupType ref={typeRef} onSelect={select} />
     <PopupDate ref={monthRef} mode="month" onSelect={selectMonth} />
+    <div className={s.add} onClick={addToggle}><CustomIcon type='tianjia' /></div>
+    <PopupAddBill ref={addRef} />
   </div>
   )
 }

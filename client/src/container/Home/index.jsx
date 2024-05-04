@@ -7,6 +7,7 @@ import BillItem from '@/components/BillItem'
 import {get,REFRESH_STATE,LOAD_STATE} from '@/utils'
 import dayjs from 'dayjs'
 import PopupType from '@/components/PopupType'
+import PopupDate from '@/components/PopupDate'
 // import Test from '@/components/Test';
 const Home = () => {
   const [list, setList] = useState([]); // 账单列表
@@ -17,10 +18,7 @@ const Home = () => {
   const [loading, setLoading] = useState(LOAD_STATE.normal); // 上拉加载状态
   const typeRef = useRef(); // 账单类型 ref
   const [currentSelect, setCurrentSelect] = useState({}); // 当前筛选类型
-  useEffect(() => {
-    getBillList() // 初始化
-  }, [page, currentSelect])
-
+  const monthRef = useRef(); // 月份筛选 ref
   const getBillList = async () => {
     const { data } = await get(`/bill/list?page=${page}&page_size=5&date=${currentTime}&type_id=${currentSelect.id || 'all'}`);
     // 下拉刷新，重制数
@@ -34,6 +32,9 @@ const Home = () => {
     setLoading(LOAD_STATE.success);
     setRefreshing(REFRESH_STATE.success);
   }
+  useEffect(() => {
+    getBillList() // 初始化
+  },[page, currentSelect,currentTime])
   // 请求列表数据
   const refreshData = () => {
     setRefreshing(REFRESH_STATE.loading);
@@ -54,6 +55,10 @@ const Home = () => {
   const toggle = () => {
     typeRef.current && typeRef.current.show()
   };
+  // 选择月份弹窗
+  const monthToggle = () => {
+    monthRef.current && monthRef.current.show()
+  };
 
   // 筛选类型
   const select = (item) => {
@@ -62,6 +67,13 @@ const Home = () => {
     setPage(1);
     setCurrentSelect(item)
   }
+   // 筛选月份
+   const selectMonth = (item) => {
+    setRefreshing(REFRESH_STATE.loading);
+    setPage(1);
+    setCurrentTime(item)
+  }
+
   return (
     <div className={s.home}>
     <div className={s.header}>
@@ -74,7 +86,7 @@ const Home = () => {
           <span className={s.title}>{ currentSelect.name || '全部类型' }  <Icon className={s.arrow} type="home" /></span>
         </div>
         <div className={s.right}>
-          <span className={s.time}>2022-06<Icon className={s.arrow} type="home" /></span>
+          <span className={s.time} onClick={monthToggle}>{currentTime}<Icon className={s.arrow} type="home" /></span>
         </div>
       </div>
     </div>
@@ -103,6 +115,7 @@ const Home = () => {
       }
     </div>
     <PopupType ref={typeRef} onSelect={select} />
+    <PopupDate ref={monthRef} mode="month" onSelect={selectMonth} />
   </div>
   )
 }

@@ -3,8 +3,10 @@ import { useState,useCallback } from 'react';
 import { List, Input, Checkbox,Button,Toast} from 'zarm'
 import { post } from '@/utils'
 import Captcha from "react-captcha-code"
+import { useNavigate } from 'react-router-dom';
 import cx from 'classnames'
 const Login = () => {
+    const navigateTo = useNavigate()
     const [username, setUsername] = useState(''); // 账号
     const [password, setPassword] = useState(''); // 密码
     const [verify, setVerify] = useState(''); // 验证码
@@ -36,6 +38,7 @@ const Login = () => {
             // 将 token 写入 localStorage
             console.log("success")
             localStorage.setItem('token', data.token);
+            navigateTo('/')
           } else {
             if (!verify) {
               Toast.show('请输入验证码')

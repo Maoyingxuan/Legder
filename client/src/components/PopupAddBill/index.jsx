@@ -1,10 +1,10 @@
 import { forwardRef, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Popup, Icon, Toast, Keyboard, Modal, Input  } from 'zarm';
+import { Popup, Icon, Toast, Keyboard,Input  } from 'zarm';
 import cx from 'classnames'
 import dayjs from 'dayjs'; 
 import PopupDate from '../PopupDate'
-import { get, typeMap, post } from '@/utils'
+import { get,post } from '@/utils'
 
 import s from './style.module.less';
 
@@ -45,7 +45,7 @@ const PopupAddBill = forwardRef(function MyInput(props, ref) {
         setShow(false);
       }
     }
-  };
+  }
 
   useEffect(() => {
     getList()
@@ -60,7 +60,7 @@ const PopupAddBill = forwardRef(function MyInput(props, ref) {
       // 没有 id 的情况下，说明是新建账单。
     if (!id) {
       setCurrentType(_expense[0]);
-    };
+    }
   }
 
   // 切换收入还是支出

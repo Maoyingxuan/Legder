@@ -1,10 +1,13 @@
 // router/index.js
-// import Index from '../container/Index'
 import Home from '@/container/Home'
 import Data from '@/container/Data'
 import User from '@/container/User'
 import Login from '@/container/Login'
 import Detail from '@/container/Detail'
+import Account from '@/container/Account'
+import About from '@/container/About'
+import UserInfo from '@/container/UserInfo'
+
 const routes = [
   {
     path: "/",
@@ -25,6 +28,18 @@ const routes = [
   {
     path: "/detail",
     component: Detail
+  },
+  {
+    path: "/account",
+    component: Account
+  },
+  {
+    path: "/about",
+    component: About
+  },
+  {
+    path: "/userinfo",
+    component: UserInfo
   },
 ];
 
